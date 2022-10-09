@@ -92,3 +92,114 @@ public class Calculator {
             opt = ' ';
             val = 0;
         });
+        
+        btnBack = initBtn("<-", x[1], y[1], event -> {
+            repaintFont();
+            String str = inText.getText();
+            StringBuilder str2 = new StringBuilder();
+            for (int i = 0; i < (str.length() - 1); i++) {
+                str2.append(str.charAt(i));
+            }
+            if (str2.toString().equals("")) {
+                inText.setText("0");
+            } else {
+                inText.setText(str2.toString());
+            }
+        });
+
+        btnMod = initBtn("%", x[2], y[1], event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                    } else {
+                        inText.setText(String.valueOf(val));
+                    }
+                    opt = '%';
+                    go = false;
+                    addWrite = false;
+                }
+        });
+
+        btnDiv = initBtn("/", x[3], y[1], event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                    } else {
+                        inText.setText(String.valueOf(val));
+                    }
+                    opt = '/';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '/';
+                }
+        });
+
+        btn7 = initBtn("7", x[0], y[2], event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("7");
+                } else {
+                    inText.setText(inText.getText() + "7");
+                }
+            } else {
+                inText.setText("7");
+                addWrite = true;
+            }
+            go = true;
+        });
+
+        btn8 = initBtn("8", x[1], y[2], event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("8");
+                } else {
+                    inText.setText(inText.getText() + "8");
+                }
+            } else {
+                inText.setText("8");
+                addWrite = true;
+            }
+            go = true;
+        });
+
+        btn9 = initBtn("9", x[2], y[2], event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("9");
+                } else {
+                    inText.setText(inText.getText() + "9");
+                }
+            } else {
+                inText.setText("9");
+                addWrite = true;
+            }
+            go = true;
+        });
+
+        btnMul = initBtn("*", x[3], y[2], event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                    } else {
+                        inText.setText(String.valueOf(val));
+                    }
+                    opt = '*';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '*';
+                }
+        });
